@@ -2,11 +2,16 @@ import hashlib
 
 
 def calculate_hash(data):
+    if not isinstance(data, str):
+        raise TypeError("Transaction data must be a string.")
+
+    if not data.strip():
+        raise ValueError("Transaction data cannot be empty.")
+
     data_bytes = data.encode("utf-8")
     hash_value = hashlib.sha256(data_bytes)
 
     return hash_value.hexdigest()
-
 
 def main():
     transaction = "Pay $75,000 to Account A"
